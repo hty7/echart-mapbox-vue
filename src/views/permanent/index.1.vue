@@ -165,7 +165,7 @@ export default {
       window.onresize = function () {
         self.chart.resize()
       }
-      this.map = this.chart.getModel().getComponent('mapbox').getMapbox()
+      this.map = this.chart.getModel().getComponent('mapbox3D').getMapbox()
       let map = this.map
       map.addControl(new mapboxgl.NavigationControl())
       map.on('load', function () {

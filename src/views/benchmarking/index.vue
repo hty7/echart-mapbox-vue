@@ -214,10 +214,11 @@ export default {
       }
       this.chart.setOption(this.options)
       const self = this
-      window.onresize = function () {
-        self.chart.resize()
+      window.onresize = () => {
+        this.f.chart.resize()
       }
-      this.map = this.chart.getModel().getComponent('mapbox').getMapbox()
+      console.log(this.chart.getModel())
+      this.map = this.chart.getModel().getComponent('mapbox3D').getMapbox()
       let map = this.map
       map.addControl(new mapboxgl.NavigationControl())
       map.addControl(new MapboxLanguage({

@@ -10,7 +10,7 @@
       </Select>
     </div>
     <VmapBox style="height:100%;width:100%;" ref='vmapBox'></VmapBox>
-    <Vsidebox></Vsidebox>
+    <!-- <Vsidebox></Vsidebox> -->
   </section>
 </template>
 

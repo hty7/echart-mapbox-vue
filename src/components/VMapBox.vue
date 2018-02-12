@@ -4,7 +4,7 @@
     <div class="vmapbox-mapStyle">
       <!-- <transition name="slide-fade"> -->
         <ButtonGroup shape="circle" size="small" class="vmapbox-mapStyle-content" v-show="show">
-          <Button type="primary" @click="mapStyleTogger('satellite-v9')">
+          <Button type="primary" @click="mapStyleTogger('mapbox://styles/mapbox/satellite-v9')">
             <Poptip trigger="hover" placement="bottom">
               <Icon type="ios-world"></Icon> 卫星地图
               <div slot="content">
@@ -12,7 +12,7 @@
               </div>
             </Poptip>
           </Button>
-          <Button type="primary" @click="mapStyleTogger('dark-v9')">
+          <Button type="primary" @click="mapStyleTogger('mapbox://styles/yangjian/cjc1e9v1c0ast2sp2n0ufw7r9')">
             <Poptip trigger="hover" placement="bottom">
               <Icon type="ios-world-outline"></Icon> 自定义地图
               <div slot="content">
@@ -29,11 +29,6 @@
         <Button :type="dimensionType?'primary':'default'" shape="circle" icon="earth" @click="dimensionTogger"></Button>
       </Tooltip>
     </div>
-    <transition name="slide-fade">
-      <div class="windowDialog" style="position: fixed;top: 0;left: 0;width: 200px;
-      height: 300px;background: rgba(199, 199, 199, 0.7);border-radius: 15px;border: 1px solid rgb(72, 72, 72);
-      box-shadow: rgba(0, 0, 0, 0.6) 2px 3px 5px 0px;" ref="windowDialog" v-show.syncy="winDialogShow">{{cityName}}</div>
-    </transition>
   </section>
 </template>
 
@@ -79,9 +74,7 @@ export default {
         {name: '潮州市', value: [116.623721, 23.779569]},
         {name: '揭阳市', value: [115.970463, 23.373230]},
         {name: '云浮市', value: [111.746914, 22.934758]}
-      ],
-      winDialogShow: false,
-      cityName: ''
+      ]
     }
   },
   mounted () {
@@ -106,7 +99,7 @@ export default {
     },
     mapStyleTogger (e) {
       this.count = 0
-      this.map.setStyle('mapbox://styles/mapbox/' + e)
+      this.map.setStyle(e)
       this.map.addControl(new MapboxLanguage({
         defaultLanguage: 'zh'
       }))
@@ -264,38 +257,16 @@ export default {
         map.on('mousemove', 'state-fills', e => {
           map.getCanvas().style.cursor = 'pointer'
           map.setFilter('state-fills-hover', ['==', 'name', e.features[0].properties.name])
-          let el = e.features[0].properties.name
-          let postion = e.point
-          self.showWinDialog(true, el, postion)
         })
         map.on('mouseleave', 'state-fills', () => {
           map.getCanvas().style.cursor = ''
           // popup.remove()
           map.setFilter('state-fills-hover', ['==', 'name', ''])
-          self.showWinDialog(false)
         })
         map.on('click', 'state-fills', e => {
           self.changeCity(e.features[0].properties.id)
         })
       })
-    },
-    showWinDialog (status, el, postion) {
-      if (postion) {
-        this.cityName = el
-        let boxHeight = window.innerHeight - 300
-        let boxWidth = window.innerWidth - 280 // 右边存在80px空间
-        if (boxHeight > postion.y) {
-          this.$refs.windowDialog.style.top = postion.y - 30 + 'px'
-        } else {
-          this.$refs.windowDialog.style.top = boxHeight + 'px'
-        }
-        if (boxWidth > postion.x) {
-          this.$refs.windowDialog.style.left = postion.x + 30 + 'px'
-        } else {
-          this.$refs.windowDialog.style.left = boxWidth + 'px'
-        }
-      }
-      this.winDialogShow = status
     },
     // 获取城市区镇中心点
     setBarData (data, status) {
@@ -418,7 +389,7 @@ export default {
   transition: all .5s ease;
 }
 .slide-fade-leave-active {
-  transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
 .slide-fade-enter, .slide-fade-leave-to {
   transform: translateX(50px);

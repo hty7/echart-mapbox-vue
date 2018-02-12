@@ -103,6 +103,7 @@ export default {
         style: 'mapbox://styles/yangjian/cjc1e9v1c0ast2sp2n0ufw7r9',
         center: [113.206456, 23.072519],
         bearing: -10,
+        pitch: 60,
         zoom: 6
       })
       map.addControl(new mapboxgl.NavigationControl())
@@ -279,6 +280,7 @@ export default {
             }
           ]
         }
+        console.log(EchartLayer)
         let echartslayer = new EchartLayer(map)
         echartslayer.chart.setOption(this.options)
       })

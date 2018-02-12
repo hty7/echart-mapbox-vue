@@ -16,8 +16,9 @@
   "dependencies": {
     "@mapbox/mapbox-gl-language": "^0.9.2",
     "axios": "^0.17.0",
-    "echarts": "^3.7.2",
-    "echarts-gl": "^1.0.0-beta.6",
+    "echarts": "^4.0.2",
+    "echarts-gl": "^1.0.2",
+    "echartslayer": "^0.1.6",
     "iview": "^2.7.4",
     "lodash.curryright": "^4.1.1",
     "mapbox-gl": "^0.42.2",
